@@ -18,11 +18,14 @@ class LoginPageState extends State<LoginPage>{
   TextEditingController userIDController = TextEditingController();
   TextEditingController pwdControler = TextEditingController();
 
+  static User usrD = User("1610227","CarryU","Phan Trung Tính","tinhpt.38@gmail.com");
+
+
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double heigh = MediaQuery.of(context).size.height;
+    userIDController.text = usrD.userId;
+    double height = MediaQuery.of(context).size.height;
     return MaterialApp(
       title: "Grabage Green DLU",
       theme: ThemeData(
@@ -41,7 +44,7 @@ class LoginPageState extends State<LoginPage>{
                 children: <Widget>[
                   Container(
                       margin: EdgeInsets.only(bottom: 32.0),
-                      height: heigh/3,
+                      height: height/3,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(90.0)),
                           gradient: LinearGradient(
@@ -91,8 +94,7 @@ class LoginPageState extends State<LoginPage>{
                   Padding(
                       padding: EdgeInsets.all(16.0),
                       child: FlatButton(onPressed: (){
-                                 Navigator.push(context,
-                                 MaterialPageRoute(builder: (context) => UserPage(User(userIDController.text,pwdControler.text,"Unknow name","Unknow Email"))));
+                                 checkCondination();
                                 },
                              splashColor: Colors.transparent,
                             child: Container(
@@ -115,7 +117,8 @@ class LoginPageState extends State<LoginPage>{
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context)=>RegistryPage()));
                       },
-                      child: Text("Registry"),
+                      child: Text("Don't have account? Registry now",
+                      style: TextStyle(fontSize: 16),),
                     ),
                   )
                 ],
@@ -124,5 +127,14 @@ class LoginPageState extends State<LoginPage>{
         ),
       ),
     );
+  }
+
+  checkCondination(){
+    if(pwdControler.text != usrD.password){
+
+    }else{
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => UserPage(User(userIDController.text,pwdControler.text,"Unknow name","Unknow Email"))));
+    }
   }
 }
