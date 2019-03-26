@@ -160,23 +160,36 @@ class RegistryPageState extends State<RegistryPage>{
         !nameController.text.isEmpty &&
         !emailController.text.isEmpty &&
         !pwdController.text.isEmpty){
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context)=>QRCodeGeneratorPage(
-              User(idController.text, pwdController.text,nameController.text,pwdController.text)
-          )));
+        if(pwdController.text == confirmPwdController.text){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context)=>QRCodeGeneratorPage(
+                  User(idController.text, pwdController.text,nameController.text,pwdController.text)
+              )));
+        }else{
+          _showDialog("Password don't match", "Input your password again!");
+        }
 
     }else{
-
+      _showDialog("Field empty", "Fill in all fields!");
     }
   }
 
-  String validateEmail(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value))
-      return 'Enter Valid Email';
-    else
-      return null;
+  void _showDialog(String title, String message){
+    showDialog(context: context,
+    builder: (BuildContext context){
+      return AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("Close"),
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    }
+    );
   }
 }

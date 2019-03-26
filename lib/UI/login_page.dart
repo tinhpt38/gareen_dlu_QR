@@ -94,7 +94,7 @@ class LoginPageState extends State<LoginPage>{
                   Padding(
                       padding: EdgeInsets.all(16.0),
                       child: FlatButton(onPressed: (){
-                                 checkCondination();
+                                 checkCondination(context);
                                 },
                              splashColor: Colors.transparent,
                             child: Container(
@@ -129,12 +129,37 @@ class LoginPageState extends State<LoginPage>{
     );
   }
 
-  checkCondination(){
+  checkCondination(BuildContext context){
     if(pwdControler.text != usrD.password){
-
+        _showDialog("Password don't match","Please input your password!");
     }else{
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => UserPage(User(userIDController.text,pwdControler.text,"Unknow name","Unknow Email"))));
     }
   }
+
+  void _showDialog(String title,String message) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Text(title),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                pwdControler.text = null;
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }
