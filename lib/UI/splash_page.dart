@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gareen_dlu_qr/Model/student.dart';
+import 'package:gareen_dlu_qr/Store/LoginStore.dart';
 import 'package:gareen_dlu_qr/UI/home_page.dart';
 import 'package:gareen_dlu_qr/UI/login_page.dart';
 import 'package:http/http.dart' as http;
@@ -22,8 +23,8 @@ class SplashPage extends StatefulWidget{
 class SplashPageState extends State<SplashPage>{
 
   Student student;
-  var urlTinh = "https://api.myjson.com/bins/xizcy";
-  var urlLam = "https://api.myjson.com/bins/sad8i";
+  var urlTinh = "https://api.myjson.com/bins/w1eci";
+  var urlLam = "https://api.myjson.com/bins/h3f2a";
   var urlNull = "https://api.myjson.com/bins/159m82";
 
   Future<Student> getDataFromJson(String url) async{
@@ -37,13 +38,14 @@ class SplashPageState extends State<SplashPage>{
   }
 
   startTime() async {
-    var _duration = new Duration(seconds:5);
-    this.getDataFromJson(urlLam);
+    var _duration = new Duration(seconds:3);
+    this.getDataFromJson(urlTinh);
     return new Timer(_duration, navigationPage);
   }
 
   navigationPage(){
     if(this.student != null) {
+      LoginStore.instance.setStudentTemp(student);
       Navigator.pushReplacement(context,
            MaterialPageRoute(builder: (context) => HomePage(student)));
     }else{
@@ -64,7 +66,31 @@ class SplashPageState extends State<SplashPage>{
     return Scaffold(
     body: Container(
       child: Center(
-        child: Text("splash"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Text("Grageen DLU QR Code",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 32,
+                color: Colors.black
+              ),),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: IconButton(
+                splashColor: Colors.transparent,
+                  icon: Icon(Icons.restore_from_trash,color: Colors.green[500],),
+                  iconSize: 100,
+                  onPressed: null),
+            ),
+            Container(
+              child: Text("Loading ...",
+              style: TextStyle(fontSize: 20),),
+            )
+          ],
+        ),
       ),
     ),
     );

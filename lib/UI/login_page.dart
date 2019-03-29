@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gareen_dlu_qr/Model/student.dart';
+import 'package:gareen_dlu_qr/Store/LoginStore.dart';
 import 'package:gareen_dlu_qr/UI/home_page.dart';
 import 'package:gareen_dlu_qr/UI/registry_page.dart';
 
@@ -128,10 +129,14 @@ class LoginPageState extends State<LoginPage>{
     if(pwdControler.text.isEmpty){
       _showDialog("Password Empty","Please input your password");
     }else{
-      Student student;
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => HomePage(student)));
-    }
+      if(userIDController.text == LoginStore.instance.student.id &&
+      pwdControler.text == LoginStore.instance.student.password){
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => HomePage(LoginStore.instance.student)));
+      }else{
+        _showDialog("Login Fail","Check your id and password and login again!");
+      }
+      }
   }
 
   void _showDialog(String title,String message) {

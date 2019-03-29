@@ -17,7 +17,7 @@ class Student{
 
   Student({this.lastName, this.firstName, this.fullName, this.id, this.age,
       this.email, this.factory, this.objectClass, this.avatarUrl,
-      this.score});
+      this.score,this.password});
 
   factory Student.fromJson(Map<String,dynamic> json){
     return Student(
@@ -30,7 +30,8 @@ class Student{
       factory: json["factory"],
       objectClass: json["object_class"],
       avatarUrl: json["avatar_url"],
-      score: json["score"]
+      score: json["score"],
+      password: json["password"]
     );
   }
 

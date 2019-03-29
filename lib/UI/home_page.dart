@@ -45,6 +45,7 @@ class HomePageState extends State<HomePage>{
               accountEmail: Text(student.email),
               currentAccountPicture: Container(
                 decoration: BoxDecoration(
+                  color: Colors.grey[300],
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.fill,
