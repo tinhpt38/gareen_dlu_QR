@@ -13,6 +13,7 @@ class Student{
   String avatarUrl;
   String password;
   int score;
+  Map<String,dynamic> json;
 
   Student({this.lastName, this.firstName, this.fullName, this.id, this.age,
       this.email, this.factory, this.objectClass, this.avatarUrl,
@@ -31,6 +32,10 @@ class Student{
       avatarUrl: json["avatar_url"],
       score: json["score"]
     );
+  }
+
+  exportDataQR(){
+    return "name: $fullName, id: $id, score: $score";
   }
 
   static cloneStudent(Student student){

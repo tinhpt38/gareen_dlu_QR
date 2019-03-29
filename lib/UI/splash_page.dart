@@ -22,7 +22,8 @@ class SplashPage extends StatefulWidget{
 class SplashPageState extends State<SplashPage>{
 
   Student student;
-  var urlData = "https://api.myjson.com/bins/xizcy";
+  var urlTinh = "https://api.myjson.com/bins/xizcy";
+  var urlLam = "https://api.myjson.com/bins/sad8i";
   var urlNull = "https://api.myjson.com/bins/159m82";
 
   Future<Student> getDataFromJson(String url) async{
@@ -37,7 +38,7 @@ class SplashPageState extends State<SplashPage>{
 
   startTime() async {
     var _duration = new Duration(seconds:5);
-    this.getDataFromJson(urlData);
+    this.getDataFromJson(urlLam);
     return new Timer(_duration, navigationPage);
   }
 

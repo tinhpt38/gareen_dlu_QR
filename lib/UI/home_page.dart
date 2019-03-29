@@ -39,17 +39,19 @@ class HomePageState extends State<HomePage>{
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-            accountName: Text(student.fullName),
+
+            accountName: Text(student.fullName,
+                style: TextStyle(fontSize: 18),),
               accountEmail: Text(student.email),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
-                    ? Colors.blue
-                    : Colors.white,
-                child: Text(student.firstName.substring(0,1), style:
-                  TextStyle(
-                    fontSize: 48
-                  ),),
-              ),
+              currentAccountPicture: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(student.avatarUrl)
+                  )
+                ),
+              )
             ),
             ListTile(
               onTap: (){
@@ -79,7 +81,7 @@ class HomePageState extends State<HomePage>{
       body: Container(
         child: Center(
           child: QrImage(
-            data: student.toString(),
+            data: student.exportDataQR(),
             size: width *(2/3),
           ),
         )
