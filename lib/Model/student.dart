@@ -14,7 +14,6 @@ class Student{
   String password;
   int score;
 
-
   Student({this.lastName, this.firstName, this.fullName, this.id, this.age,
       this.email, this.factory, this.objectClass, this.avatarUrl,
       this.score});
@@ -32,5 +31,20 @@ class Student{
       avatarUrl: json["avatar_url"],
       score: json["score"]
     );
+  }
+
+  static cloneStudent(Student student){
+    return Student(
+        lastName: student.lastName,
+        firstName: student.firstName,
+        fullName: student.fullName,
+        id: student.id,
+        age: student.age,
+        email: student.email,
+        factory: student.factory,
+        objectClass: student.objectClass,
+        avatarUrl: student.avatarUrl,
+        score: student.score);
+
   }
 }
