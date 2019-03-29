@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gareen_dlu_qr/Model/user.dart';
+import 'package:gareen_dlu_qr/Model/student.dart';
 import 'package:gareen_dlu_qr/UI/home_page.dart';
-import 'package:gareen_dlu_qr/UI/user_page.dart';
 import 'package:gareen_dlu_qr/UI/registry_page.dart';
 
 
@@ -19,13 +18,8 @@ class LoginPageState extends State<LoginPage>{
   TextEditingController userIDController = TextEditingController();
   TextEditingController pwdControler = TextEditingController();
 
-   static User usrD = User("1610227","CarryU","Phan Trung Tính","tinhpt.38@gmail.com");
-
-
-
   @override
   Widget build(BuildContext context) {
-//    userIDController.text = usrD.userId;
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
       title: "Grabage Green DLU",
@@ -133,13 +127,10 @@ class LoginPageState extends State<LoginPage>{
   checkCondination(BuildContext context){
     if(pwdControler.text.isEmpty){
       _showDialog("Password Empty","Please input your password");
-    }else if(userIDController.text != usrD.userId){
-      _showDialog("User ID don't match","Please input your User ID again.");
-    }else if(pwdControler.text != usrD.password){
-        _showDialog("Password don't match","Please input your password again.");
     }else{
+      Student student;
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => HomePage(usrD)));
+          MaterialPageRoute(builder: (context) => HomePage(student)));
     }
   }
 

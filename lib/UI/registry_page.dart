@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gareen_dlu_qr/Model/user.dart';
+import 'package:gareen_dlu_qr/Model/student.dart';
 import 'package:gareen_dlu_qr/UI/home_page.dart';
 
 
@@ -161,9 +161,9 @@ class RegistryPageState extends State<RegistryPage>{
         !emailController.text.isEmpty &&
         !pwdController.text.isEmpty){
         if(pwdController.text == confirmPwdController.text){
-          var user = User(idController.text,pwdController.text,nameController.text,emailController.text);
+          Student student;
           Navigator.push(context,
-              MaterialPageRoute(builder: (context)=> HomePage(user)));
+              MaterialPageRoute(builder: (context)=> HomePage(student)));
         }else{
           _showDialog("Password don't match", "Input your password again!");
         }

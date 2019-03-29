@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:gareen_dlu_qr/Model/user.dart';
+import 'package:gareen_dlu_qr/Model/student.dart';
 import 'package:gareen_dlu_qr/UI/login_page.dart';
+import 'package:gareen_dlu_qr/UI/update_profile_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
 
 class HomePage extends StatefulWidget{
-  final User usr;
+  final Student student;
 
 
-  const HomePage(@required this.usr);
+  const HomePage(@required this.student);
 
   @override
   State<StatefulWidget> createState() {
 
-    return HomePageState(usr);
+    return HomePageState(student);
   }
 }
 
 
 class HomePageState extends State<HomePage>{
 
-  final User user;
+  final Student student;
 
-  HomePageState(@required this.user);
+  HomePageState(@required this.student);
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +39,23 @@ class HomePageState extends State<HomePage>{
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-            accountName: Text(user.userName),
-              accountEmail: Text(user.userEmail),
+            accountName: Text(student.fullName),
+              accountEmail: Text(student.email),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
                     ? Colors.blue
                     : Colors.white,
-                child: Text(user.userName.substring(0,1), style:
+                child: Text(student.firstName.substring(0,1), style:
                   TextStyle(
                     fontSize: 48
                   ),),
               ),
             ),
             ListTile(
+              onTap: (){
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => UpdateProfilePage()));
+              },
               title: Text("Update Profile",
                   style: TextStyle(
                     fontSize: 16
@@ -58,6 +63,10 @@ class HomePageState extends State<HomePage>{
               leading: Icon(Icons.update,color: Colors.blue,),
             ),
             ListTile(
+              onTap: (){
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context)=>LoginPage()));
+              },
               title: Text("Logout",
               style: TextStyle(
                 fontSize: 16
@@ -70,11 +79,17 @@ class HomePageState extends State<HomePage>{
       body: Container(
         child: Center(
           child: QrImage(
-            data: user.userToString(),
+            data: student.toString(),
             size: width *(2/3),
           ),
         )
       ),
     );
   }
+}
+
+
+void onSelectedItem(int index){
+
+
 }
