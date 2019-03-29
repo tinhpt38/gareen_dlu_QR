@@ -161,7 +161,13 @@ class RegistryPageState extends State<RegistryPage>{
         !emailController.text.isEmpty &&
         !pwdController.text.isEmpty){
         if(pwdController.text == confirmPwdController.text){
-          Student student;
+          Student student = Student(
+            fullName: nameController.text.trim(),
+            id: idController.text.trim(),
+            email: emailController.text.trim(),
+            password: pwdController.text.trim(),
+            avatarUrl: "",
+            score: 0);
           Navigator.push(context,
               MaterialPageRoute(builder: (context)=> HomePage(student)));
         }else{

@@ -15,8 +15,4 @@ class LoginStore{
     this.student = student;
   }
 
-  getStudentTemp(){
-    return this.student;
-  }
-
 }

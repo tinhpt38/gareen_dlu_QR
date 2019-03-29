@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gareen_dlu_qr/Model/student.dart';
+import 'package:gareen_dlu_qr/Store/LoginStore.dart';
 import 'package:gareen_dlu_qr/UI/login_page.dart';
 import 'package:gareen_dlu_qr/UI/update_profile_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-
+    LoginStore.instance.setStudentTemp(student);
     return HomePageState(student);
   }
 }

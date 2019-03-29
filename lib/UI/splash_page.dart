@@ -45,7 +45,6 @@ class SplashPageState extends State<SplashPage>{
 
   navigationPage(){
     if(this.student != null) {
-      LoginStore.instance.setStudentTemp(student);
       Navigator.pushReplacement(context,
            MaterialPageRoute(builder: (context) => HomePage(student)));
     }else{
